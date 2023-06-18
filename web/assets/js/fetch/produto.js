@@ -6,7 +6,7 @@ export const getListProdutos = async () => {
       const data = await response.json()
       return data
     }
-  } catch (err) {
+  } catch(err) {
     console.log(err)
   }
 }

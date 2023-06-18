@@ -3,16 +3,20 @@
 namespace Domain\Factory;
 
 use Domain\Repository\LocaisRepository;
+use Domain\Entity\LocaisEntity;
 
-abstract class LocaisFactory
+abstract class LocaisFactory extends AbstractFactory
 {
-    private static function getRepository()
+    public static function getRepository(): LocaisRepository
     {
-       return new LocaisRepository();
+        return new LocaisRepository();
     }
-    
-    public static function getListLocais(): array|string    
+
+    public static function getEntity(array|null $data): LocaisEntity
     {
-        return self::getRepository()->getAllLocais();
+        return new LocaisEntity(
+            local_id: $data['local_id'] ?? null,
+            local_nome: $data['local_nome'] ?? null
+        );
     }
 }

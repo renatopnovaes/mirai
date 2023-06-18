@@ -1,4 +1,4 @@
-window.addEventListener('load', () => {
+window.addEventListener('load', () => {   
     // Obtém o elemento do seletor de data
     const dataInput = document.getElementById('data_carga');
 
