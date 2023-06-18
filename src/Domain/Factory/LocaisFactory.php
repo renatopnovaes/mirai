@@ -13,6 +13,6 @@ abstract class LocaisFactory
     
     public static function getListLocais(): array|string    
     {
-        return self::getRepository()->getListLocais();
+        return self::getRepository()->getAllLocais();
     }
 }

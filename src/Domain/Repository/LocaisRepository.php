@@ -6,7 +6,7 @@ use Infra\Database\Pgsql\DBConnection;
 
 class LocaisRepository
 {
-   public function getListLocais(): array|string
+   public function getAllLocais(): array|string
    {
      $conn = DBConnection::getInstance();
 

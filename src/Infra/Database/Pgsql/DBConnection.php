@@ -7,12 +7,10 @@ class DBConnection
 {
     private static ?\PDO $instance = null;
     private function __construct() {
-        $host = getenv('DB_HOST');
-        $database = getenv('DB_NAME');
-        $username = getenv('DB_USER');
-        $password = getenv('DB_PASSWORD');
-
-        var_dump($host);die;
+        $host = $_ENV['DB_HOST'];
+        $database = $_ENV['DB_NAME'];
+        $username = $_ENV['DB_USER'];
+        $password = $_ENV['DB_PASSWORD'];       
 
         $dsn = "pgsql:host=$host;dbname=$database";
         $options = [
