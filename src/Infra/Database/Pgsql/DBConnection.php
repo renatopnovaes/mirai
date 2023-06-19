@@ -1,15 +1,18 @@
 <?php
-
 namespace Infra\Database\Pgsql;
+
+require_once dirname(dirname(dirname(dirname(__DIR__)))) . "/config/autoload.php";
 
 class DBConnection
 {
     private static ?\PDO $instance = null;
     private function __construct() {
-        $host = 'localhost';
-        $database = 'postgres';
-        $username = 'postgres';
-        $password = 'rena1409';
+        $host = getenv('DB_HOST');
+        $database = getenv('DB_NAME');
+        $username = getenv('DB_USER');
+        $password = getenv('DB_PASSWORD');
+
+        var_dump($host);die;
 
         $dsn = "pgsql:host=$host;dbname=$database";
         $options = [
