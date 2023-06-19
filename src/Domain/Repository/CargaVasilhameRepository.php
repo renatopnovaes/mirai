@@ -3,9 +3,10 @@ namespace Domain\Repository;
 
 use Infra\Database\Pgsql\DBConnection;
 
-
 class CargaVasilhameRepository
 {
+
+    
    public function getAllCargaVasilhame(): array|string
    {
      $conn = DBConnection::getInstance();
@@ -34,6 +35,8 @@ class CargaVasilhameRepository
 
    public function insertCargaVasilhame($numero, $data)
 {
+
+    
     $conn = DBConnection::getInstance();
 
         $sql = "
@@ -53,3 +56,4 @@ class CargaVasilhameRepository
     }
 }
 };
+
