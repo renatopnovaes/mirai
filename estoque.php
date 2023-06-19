@@ -70,7 +70,7 @@ require_once __DIR__ . "/config/autoload.php";
 
                                 <div class="col">
                                     <label for="carga">Número da carga</label>
-                                    <input type="number" name="carga" id="carga" placeholder="Nº da Carga" class="form-control" required>
+                                    <input type="number" name="numero_carga" id="numero_carga" placeholder="Nº da Carga" class="form-control" required>
                                 </div>
 
                                 <div class="col">

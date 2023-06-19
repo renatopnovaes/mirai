@@ -1,12 +1,10 @@
-export const getListProdutos = async () => {
-  try {
-    const response = await fetch("/mirai/src/Application/Request/Fetch/ProdutoFetch.php")
+import { ApiClient } from "../common/helpers/request.js"
 
-    if (response.ok) {
-      const data = await response.json()
-      return data
-    }
-  } catch(err) {
-    console.log(err)
-  }
+export const getListProdutos = async () => {
+  const listProduto = await ApiClient.request({
+    method: 'GET',
+    url: '/Produto/getProduto.php'
+  })
+
+  return listProduto
 }
