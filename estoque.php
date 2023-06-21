@@ -55,7 +55,7 @@ require_once __DIR__ . "/config/autoload.php";
             <!-- Modal -->
             <div class="modal fade" id="novaCarga" tabindex="-1" aria-labelledby="novaCargaLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form action="" method="post">
+                    <form action="" method="post" id="form_carga">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="novaCargaLabel">Nova Carga</h1>
@@ -90,7 +90,7 @@ require_once __DIR__ . "/config/autoload.php";
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                <button type="button" id="salvar_carga" class="btn btn-primary">Salvar Carga</button>
+                                <button type="button" id="salvar_carga" class="btn btn-primary" >Salvar Carga</button>
                             </div>
                     </form>
                 </div>

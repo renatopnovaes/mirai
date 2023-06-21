@@ -16,13 +16,14 @@ async function createOptionForSelectLocais(colletion) {
     Array.from(select.querySelectorAll('option:not(:first-child)')).forEach(op => op[0].remove())
 
     // Adiciona as options
-    Array.from(list_locais).forEach(local => {
-      const { local_id, local_nome } = local
-  
-      if (local_id && local_nome) {
-        select.append(new Option(local_nome, local_id))
-      }
-    })
+    if (Array.isArray(list_locais)) {
+      Array.from(list_locais).forEach(local => {
+        const { local_id, local_nome } = local
 
+        if (local_id && local_nome) {
+          select.append(new Option(local_nome, local_id))
+        }
+      })
+    }
   })
 }

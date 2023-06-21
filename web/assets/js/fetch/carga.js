@@ -10,19 +10,23 @@ export const getListCargaVasilhame = async () => {
 }
 
 export const addCargaVasilhame = async (formData) => {
-  if (formData) {
-    const response = await ApiClient.request({
-      method: 'POST',
-      url: '/Carga/addCargaVasilhame.php',
-      data: formData
-    })
+  try {
+    if (formData) {
+      const response = await ApiClient.request({
+        method: 'POST',
+        url: '/Carga/addCargaVasilhame.php',
+        data: formData
+      })
 
-    if (response) {
-      alert(
-        response?.error 
-        || response?.message 
-        || "Requisição não realizada. Por favor entre em contato com o supporte!"
-      )
+      alert(response.error || response.message);
+
+      return response.message ? { message: response.message, status: true } : { message: response.error, status: false }
     }
+  } catch (e) {
+    throw new Error(e)
   }
+
 }
+
+
+

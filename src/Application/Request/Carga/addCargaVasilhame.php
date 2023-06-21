@@ -23,5 +23,3 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $repository->addCargaVasilhame($numeroCarga, $dataCarga);
     die(json_encode(["message" => "Carga cadastrada com sucesso!"]));
 }
-
-

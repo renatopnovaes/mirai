@@ -1,4 +1,5 @@
 import { addCargaVasilhame } from "./fetch/carga.js";
+import { closeModal } from './closeModal.js'
 
 const inputCarga = document.querySelector('input[name="numero_carga"]');
 const inputDataCarga = document.querySelector('input[name="data_carga"]');
@@ -13,5 +14,18 @@ btnSalvarCarga.addEventListener("click", () => {
   formData.append('data_carga', data_carga);
 
   // Enviar a requisição usando fetch
-  addCargaVasilhame(formData)
+  // addCargaVasilhame(formData)
+
+
+  (async () => {
+    try {
+      const request = await addCargaVasilhame(formData);
+
+      if (request.status) return closeModal(request.status)
+      console.log("status nao entrou")
+    } catch {
+
+
+    }
+  })()
 });
