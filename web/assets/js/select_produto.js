@@ -1,5 +1,7 @@
 import { getListProdutos } from "./fetch/produto.js"
 
+
+
 window.addEventListener('load', () => {
     createOptionForSelectProduto()
 })
@@ -15,6 +17,7 @@ async function createOptionForSelectProduto() {
     if (Array.isArray(list_produto) && list_produto.length) {
         list_produto.forEach(produto => {
             const { produto_id, produto_nome, produto_quantidade } = produto
+
 
             if (produto_id && produto_nome) {
                 select_produto.append(new Option(produto_nome.concat("(", produto_quantidade, ")"), produto_id))

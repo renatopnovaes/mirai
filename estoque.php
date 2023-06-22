@@ -69,11 +69,11 @@ require_once __DIR__ . "/config/autoload.php";
                                 </div>
 
                                 <div class="col">
-                                    <label for="carga">Número da carga</label>
+                                    <label for="numero_carga">Número da carga</label>
                                     <input type="number" name="numero_carga" id="numero_carga" placeholder="Nº da Carga" class="form-control" required>
                                 </div>
 
-                                <div class="col">
+                                <!-- <div class="col">
                                     <label for="origem">Origem</label>
                                     <select name="origem" required id="origem" class="form-select" required>
                                         <option disabled selected value="">Escolha a sua Origem</option>
@@ -85,12 +85,12 @@ require_once __DIR__ . "/config/autoload.php";
                                     <select name="destino" required id="destino" class="form-select" required>
                                         <option disabled selected value="">Escolha a sua Origem</option>
                                     </select>
-                                </div>
+                                </div> -->
 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                <button type="button" id="salvar_carga" class="btn btn-primary" >Salvar Carga</button>
+                                <button type="button" id="salvar_carga" class="btn btn-primary">Salvar Carga</button>
                             </div>
                     </form>
                 </div>
@@ -113,8 +113,11 @@ require_once __DIR__ . "/config/autoload.php";
             </div>
 
             <div class="col">
-                <label for="carga">Número da carga</label>
-                <input type="number" name="carga" placeholder="Nº da Carga" class="form-control" required>
+                <label for="carga_vasilhame">Número da carga</label>
+                <input type="number" id="carga_vasilhame" name="carga_vasilhame" list="carga" placeholder="Nº da Carga" class="form-control" required>
+                <datalist id="carga">
+
+                </datalist>
             </div>
 
             <div class="col">
@@ -137,6 +140,7 @@ require_once __DIR__ . "/config/autoload.php";
             <div class="col produto">
                 <label for="produto">Produto</label>
                 <select name="produto" id="produto" class="form-select" required>
+                    <option disabled value="" selected></option>
                 </select>
             </div>
 

@@ -28,5 +28,12 @@ export const addCargaVasilhame = async (formData) => {
 
 }
 
+export const getBuscaCargaVasilhame = async (procuraCarga) => {
+  const buscaCarga = await ApiClient.request({
+    method: 'GET',
+    url: `/Carga/getCargaVasilhame.php?carga_vasilhame=${procuraCarga}`
+  })
 
+  return buscaCarga
+}
 

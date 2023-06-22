@@ -5,6 +5,7 @@ window.addEventListener('load', () => {
   const select_destino = document.querySelector('select[name="destino"]')
 
   createOptionForSelectLocais([select_origem, select_destino])
+
 })
 
 async function createOptionForSelectLocais(colletion) {

@@ -1,12 +1,14 @@
+import { ApiClient } from "../common/helpers/request.js"
+
+
+
 export const getListLocais = async () => {
-  try {
-    const response = await fetch("/mirai/src/Application/Request/Fetch/LocaisFetch.php")
-  
-    if (response.ok) {
-      const data = await response.json()
-      return data
-    }
-  } catch(err) {
-    console.log(err)
-  }
+  const listLocais = await ApiClient.request({
+    method: 'GET',
+    url: '/Locais/getLocais.php'
+  })
+
+  return listLocais
+
 }
+
