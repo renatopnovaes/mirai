@@ -7,8 +7,6 @@ inputCarga.addEventListener("input", () => {
 
     getBuscaCargaVasilhame(procuraCarga)
         .then(listCarga => {
-            console.log("Dados retornados:", listCarga)
-
 
             const dataList = document.getElementById('carga');
 

@@ -5,4 +5,5 @@ import "./atualizar_lista_local.js"
 import "./validar_carga_numero.js"
 import "./common/utils/index.js"
 import "./carga_numero.js"
+import "./movimentacao_vasilhame.js"
 

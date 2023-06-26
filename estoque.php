@@ -55,7 +55,7 @@ require_once __DIR__ . "/config/autoload.php";
             <!-- Modal -->
             <div class="modal fade" id="novaCarga" tabindex="-1" aria-labelledby="novaCargaLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <form action="" method="post" id="form_carga">
+                    <form method="post" id="form_carga">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="novaCargaLabel">Nova Carga</h1>
@@ -103,13 +103,17 @@ require_once __DIR__ . "/config/autoload.php";
     <div class="row">
         <h4 class="text-center mt-3 ">Movimentação de Estoque</h4>
     </div>
-    <form action="inserir_estoque.php" method="post">
+    <form id="vasilhame_movimentacao" method="post">
+        <?php
+        var_dump($_POST);
+
+        ?>
 
         <div class="row mt-3">
 
             <div class="col">
                 <label for="data_carga">Data da Carga</label>
-                <input type="date" name="data_carga" readonly required pattern="\d{1,2}/\d{1,2}/\d{4}" class="form-control" required>
+                <input type="date" readonly required pattern="\d{1,2}/\d{1,2}/\d{4}" class="form-control" required>
             </div>
 
             <div class="col">
@@ -156,7 +160,7 @@ require_once __DIR__ . "/config/autoload.php";
 
             <div class="col produto">
                 <label for="quantidade_total">Quantidade Total</label>
-                <input type="number" class="form-control" name="quantidade_total[]" id="quantidade_total" readonly>
+                <input type="number" class="form-control" name="quantidade_total" id="quantidade_total" readonly>
             </div>
 
 
@@ -193,7 +197,7 @@ require_once __DIR__ . "/config/autoload.php";
                     let caixas = parseInt(quantidade.value) || 0
 
                     let resultado = (caixas * valorExtraido) + totalUnidades
-                    console.log(resultado)
+
 
                     quantidadeTotal.value = resultado
                 }
@@ -228,9 +232,8 @@ require_once __DIR__ . "/config/autoload.php";
 
         <div class="row mt-5 ">
             <div class="col position-absolute  start-100 translate-middle">
-                <button type="submit">Salvar Produto</button>
+                <button type="submit" id="salvarMovimentacaoVasilhame">Salvar Produto</button>
             </div>
-
 
         </div>
 
