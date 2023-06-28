@@ -6,4 +6,4 @@ import "./validar_carga_numero.js"
 import "./common/utils/index.js"
 import "./carga_numero.js"
 import "./movimentacao_vasilhame.js"
-
+import "./tabela_movimentacao.js"

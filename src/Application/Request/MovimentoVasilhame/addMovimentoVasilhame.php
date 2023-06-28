@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     }
 
 
-    $repository->addMovimentoVasilhame(intval($numeroCarga), $produto, intval($quantidade), intval($origem), intval($destino), $observacoes);
+    $repository->addMovimentoVasilhame(intval($numeroCarga), intval($origem), intval($destino), $produto,  intval($quantidade), $observacoes);
 
     die(json_encode(["message" => "Carga cadastrada com sucesso!"]));
 }

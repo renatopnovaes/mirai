@@ -20,7 +20,8 @@ class MovimentoVasilhameRepository
                 movimento_vasilhame_produto, 
                 movimento_vasilhame_quantidade, 
                 movimento_vasilhame_observacao
-            FROM public.movimento_vasilhame;
+            FROM public.movimento_vasilhame
+            order by 1 desc;
         ";
 
         try {
@@ -74,6 +75,31 @@ class MovimentoVasilhameRepository
             $stt->bindValue(':observacoes', $observacoes, \PDO::PARAM_STR);
 
 
+
+            $stt->execute();
+        } catch (\Exception $e) {
+            echo "Erro ao executar a consulta: " . $e->getMessage();
+        }
+    }
+
+
+    public function removeOneMovimentoVasilhame($id)
+    {
+
+
+        $conn = DBConnection::getInstance();
+
+        $sql = "
+        DELETE FROM public.movimento_vasilhame
+        WHERE movimento_vasilhame_id =
+            :id            
+        ";
+
+
+        try {
+            $stt = $conn->prepare($sql);
+
+            $stt->bindValue(':id', $id, \PDO::PARAM_INT);
 
             $stt->execute();
         } catch (\Exception $e) {

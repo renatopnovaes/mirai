@@ -67,8 +67,8 @@ class CargaVasilhameRepository
                 carga_numero,
                 carga_data
             FROM public.carga_vasilhame
-           WHERE CAST(carga_numero AS TEXT) LIKE :numero
-           LIMIT 10    
+            WHERE CAST(carga_numero AS TEXT) LIKE :numero
+            LIMIT 10    
         ";
 
         try {
