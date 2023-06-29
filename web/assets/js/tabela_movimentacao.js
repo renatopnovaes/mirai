@@ -1,12 +1,14 @@
-import { getListMovimentacao, removeOneMovimentacaoVasilhame } from "./fetch/movimentacao.js";
+import { getListMovimentacao, removeOneMovimentacaoVasilhame, getVwListMovimentacao } from "./fetch/movimentacao.js";
 window.addEventListener('load', () => {
     createTableMovimentacao();
 });
 
 export async function createTableMovimentacao() {
     try {
-        const response = await getListMovimentacao();
+        //const response = await getListMovimentacao();
+        const response = await getVwListMovimentacao();
 
+        console.log(response)
         let table = document.getElementById('movimentacaoTable');
         let tbody;
 
@@ -27,7 +29,7 @@ export async function createTableMovimentacao() {
                 const thead = document.createElement('thead');
                 const headerRow = document.createElement('tr');
 
-                const headers = ['Carga', 'Origem', 'Destino', 'Produto', 'Quantidade', 'Observação', 'Ação'];
+                const headers = ['Carga', 'Data', 'Produto', 'Quantidade', 'Origem', 'Destino', 'Observações', 'Ação'];
 
                 headers.forEach(headerText => {
                     const th = document.createElement('th');
@@ -51,12 +53,13 @@ export async function createTableMovimentacao() {
                 const row = document.createElement('tr');
 
                 const cells = [
-                    item.movimento_vasilhame_carga,
-                    item.movimento_vasilhame_origem,
-                    item.movimento_vasilhame_destino,
-                    item.movimento_vasilhame_produto,
-                    item.movimento_vasilhame_quantidade,
-                    item.movimento_vasilhame_observacao
+                    item.carga,
+                    item.data_carga,
+                    item.produto,
+                    item.quantidade,
+                    item.origem,
+                    item.destino,
+                    item.observacoes
                 ];
 
                 cells.forEach(cellValue => {

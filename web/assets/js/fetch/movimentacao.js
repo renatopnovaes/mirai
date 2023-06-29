@@ -40,3 +40,13 @@ export const removeOneMovimentacaoVasilhame = async (rowId) => {
 
     alert(response.error || response.message)
 }
+
+
+export const getVwListMovimentacao = async () => {
+    const VwlistMovimentacao = await ApiClient.request({
+        method: 'GET',
+        url: '/Views/getVwMovimentoVasilhame.php'
+    })
+
+    return VwlistMovimentacao
+}

@@ -15,7 +15,8 @@ class MovimentoVasilhameEntity
         private readonly int $movimento_vasilhame_observacao
 
 
-    ) {}
+    ) {
+    }
 
     public function getMovimentoVasilhameId(): int
     {
@@ -27,17 +28,17 @@ class MovimentoVasilhameEntity
         return $this->movimento_vasilhame_carga;
     }
 
-    public function getMovimentoVasilhameOrigem(): string
+    public function getMovimentoVasilhameOrigem(): int
     {
         return $this->movimento_vasilhame_origem;
     }
 
-    public function getMovimentoVasilhameDestino(): string
+    public function getMovimentoVasilhameDestino(): int
     {
         return $this->movimento_vasilhame_destino;
     }
 
-    public function getMovimentoVasilhameProduto(): string
+    public function getMovimentoVasilhameProduto(): int
     {
         return $this->movimento_vasilhame_produto;
     }
