@@ -11,9 +11,9 @@ CREATE TABLE movimento_vasilhame
 (
   movimento_vasilhame_id SERIAL PRIMARY KEY,
   movimento_vasilhame_carga INTEGER,
-  movimento_vasilhame_origem VARCHAR(255),
-  movimento_vasilhame_destino VARCHAR(255),
-  movimento_vasilhame_produto VARCHAR(255),
+  movimento_vasilhame_origem INTEGER,
+  movimento_vasilhame_destino INTEGER,
+  movimento_vasilhame_produto INTEGER,
   movimento_vasilhame_quantidade INTEGER,
   movimento_vasilhame_observacao VARCHAR(255)
 );

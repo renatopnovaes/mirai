@@ -50,3 +50,12 @@ export const getVwListMovimentacao = async () => {
 
     return VwlistMovimentacao
 }
+
+export const getVwEstoqueVasilhame = async () => {
+    const VwListEstoque = await ApiClient.request({
+        method: 'GET',
+        url: '/Views/getVwEstoqueVasilhame.php'
+    })
+
+    return VwListEstoque
+}
