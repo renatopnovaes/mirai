@@ -3,8 +3,8 @@ import { getListLocais } from "./fetch/locais.js"
 window.addEventListener('load', () => {
   const select_origem = document.querySelector('select[name="origem"]')
   const select_destino = document.querySelector('select[name="destino"]')
-
-  createOptionForSelectLocais([select_origem, select_destino])
+  const select_ajuste_estoque =  document.querySelector('select[name="local_ajuste_estoque"]')
+  createOptionForSelectLocais([select_origem, select_destino, select_ajuste_estoque])
 
 })
 

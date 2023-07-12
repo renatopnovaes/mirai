@@ -71,3 +71,49 @@ FROM
 ORDER BY 1 desc;
 
 
+------------------------------- criar tabela ajuste_vasilhame ----------------------------
+
+
+CREATE TABLE public.ajuste_vasilhame
+(
+    id_ajuste serial NOT NULL,
+    local smallint NOT NULL,
+    produto integer NOT NULL,
+    quantidade integer NOT NULL,
+    carimbo_tempo timestamp without time zone NOT NULL,
+    CONSTRAINT local_fk PRIMARY KEY (id_ajuste),
+    CONSTRAINT local_fk FOREIGN KEY (local)
+        REFERENCES public.locais (local_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT produto_fk FOREIGN KEY (produto)
+        REFERENCES public.produto (produto_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+);
+
+ALTER TABLE IF EXISTS public.ajuste_vasilhame
+    OWNER to postgres;
+
+
+
+-----------------Criar function para atualizar o carimbo--------------------
+
+CREATE OR REPLACE FUNCTION atualizar_carimbo_tempo()
+  RETURNS TRIGGER AS
+$$
+BEGIN
+  NEW.carimbo_tempo := CURRENT_TIMESTAMP;
+  RETURN NEW;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER inserir_carimbo_tempo
+  BEFORE INSERT ON public.ajuste_vasilhame
+  FOR EACH ROW
+  EXECUTE FUNCTION atualizar_carimbo_tempo();
+
+  
