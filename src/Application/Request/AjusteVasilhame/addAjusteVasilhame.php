@@ -5,7 +5,6 @@ require_once dirname(dirname(dirname(dirname(__DIR__)))) . "/config/autoload.php
 use Domain\Factory\AjusteVasilhameFactory;
 
 $repository = AjusteVasilhameFactory::getRepository();
-var_dump($_POST);
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 

@@ -1,9 +1,9 @@
 <?php
 // Configurações de conexão
-$dbhost = 'localhost';
-$dbname = 'postgres';
-$dbuser = 'postgres';
-$dbpass = 'rena1409';
+$dbhost = '';
+$dbname = '';
+$dbuser = '';
+$dbpass = '';
 
 // Cria a conexão PDO
 try {
@@ -15,5 +15,3 @@ try {
 } catch (PDOException $e) {
     echo "Erro ao conectar com o banco de dados: " . $e->getMessage();
 }
-
-?>
