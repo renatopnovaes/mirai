@@ -4,7 +4,7 @@ export const addViagem = async (formData) => {
         if (formData) {
             const response = await ApiClient.request({
                 method: 'POST',
-                url: '/Carga/addViagem.php',
+                url: '/Viagem/addViagem.php',
                 data: formData
             })
 
@@ -15,5 +15,15 @@ export const addViagem = async (formData) => {
     } catch (e) {
         throw new Error(e)
     }
+
+}
+
+export const getListViagemAberta = async () => {
+    const listViagem = await ApiClient.request({
+        method: 'GET',
+        url: '/Viagem/getViagem.php'
+    })
+
+    return listViagem
 
 }

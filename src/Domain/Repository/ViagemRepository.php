@@ -32,4 +32,28 @@ class ViagemRepository
             echo "Erro ao executar a consulta: " . $e->getMessage();
         }
     }
-};
+
+    public function getViagemAberta(): array|string
+    {
+        $conn = DBConnection::getInstance();
+
+        $sql = "
+        SELECT
+            id,
+            data_saida,
+            observacao
+        FROM
+            public.viagens
+        WHERE 
+            viagem_concluida = false";
+
+        try {
+            $stt = $conn->prepare($sql);
+            $stt->execute();
+            $result = $stt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\Exception $e) {
+            echo "Erro ao executar a consulta: " . $e->getMessage();
+        }
+        return $result;
+    }
+}

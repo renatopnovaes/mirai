@@ -1,4 +1,4 @@
-//import { addViagem } from "../../../web/assets/js/fetch/viagem";
+import { addViagem } from "../../../web/assets/js/fetch/viagem.js";
 
 document.getElementById("btnCadastrarViagem").addEventListener("click", function (e) {
 
@@ -9,7 +9,7 @@ document.getElementById("btnCadastrarViagem").addEventListener("click", function
 
     (async () => {
         try {
-            console.log("Cadastrar Viagem")
+
             const request = await addViagem(formData);
 
             if (request.status) return atualizarLista(request.status)
