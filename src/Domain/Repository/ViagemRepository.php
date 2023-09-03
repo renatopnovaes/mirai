@@ -7,25 +7,28 @@ use Infra\Database\Pgsql\DBConnection;
 
 class ViagemRepository
 {
-    public function addViagem($data_saida, $observacao): void
+    public function addViagem($data_saida, $observacao, $rota): void
     {
         $conn = DBConnection::getInstance();
 
         $sql = "
         INSERT INTO public.viagens (
             data_saida,
-            observacao
+            rota,
+            descricao
 
         ) VALUES (
             :data_saida,
-            :observacao
+            :rota,
+            :descricao
         )
     ";
         try {
             $stt = $conn->prepare($sql);
 
             $stt->bindValue(':data_saida', $data_saida, \PDO::PARAM_STR);
-            $stt->bindValue(':observacao', $observacao, \PDO::PARAM_STR);
+            $stt->bindValue(':rota', $rota, \PDO::PARAM_INT);
+            $stt->bindValue(':descricao', $observacao, \PDO::PARAM_STR);
 
             $stt->execute();
         } catch (\Exception $e) {
@@ -39,13 +42,9 @@ class ViagemRepository
 
         $sql = "
         SELECT
-            id,
-            data_saida,
-            observacao
-        FROM
-            public.viagens
-        WHERE 
-            viagem_concluida = false";
+            *
+        FROM         
+            public.vw_viagens";
 
         try {
             $stt = $conn->prepare($sql);

@@ -21,7 +21,7 @@ export const addViagem = async (formData) => {
 export const getListViagemAberta = async () => {
     const listViagem = await ApiClient.request({
         method: 'GET',
-        url: '/Viagem/getViagem.php'
+        url: '/Viagem/getViagemAtiva.php'
     })
 
     return listViagem

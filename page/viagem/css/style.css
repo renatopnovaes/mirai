@@ -1,0 +1,7 @@
+/* Mantenha os estilos existentes */
+.bg-highlight {
+    background-color: rgba(0, 255, 0, 0.289);
+    /* ou a cor que você deseja quando a linha estiver destacada */
+    /* Remova a transição de cor de fundo para desativar o efeito de hover */
+    transition: none;
+}

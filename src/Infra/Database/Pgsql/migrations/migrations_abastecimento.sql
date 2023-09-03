@@ -1,7 +1,6 @@
--------------------------VIAGENS--------------------------
 -- Tabela para armazenar informações sobre viagens
 -- Script de reinício para a tabela 'viagens', incluindo DROP TABLE se existir
-DROP TABLE IF EXISTS viagens;
+DROP TABLE IF EXISTS viagens CASCADE;
 
 -- Tabela para armazenar informações sobre viagens
 CREATE TABLE viagens (
@@ -12,7 +11,9 @@ CREATE TABLE viagens (
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data de criação do registro (preenchida automaticamente)
     data_alteracao TIMESTAMP, -- Data da última alteração do registro (começa com NULL)
     data_finalizacao TIMESTAMP, -- Data de finalização da viagem (preenchida automaticamente quando viagem_concluida for true pela primeira vez)
-    descricao TEXT -- Descrição opcional da viagem
+    descricao TEXT, -- Descrição opcional da viagem
+    rota INT, -- Nova coluna "rota" do tipo INT
+    status INT -- Nova coluna "status" do tipo INT
 );
 
 -- Comentários para a tabela e colunas
@@ -25,8 +26,8 @@ COMMENT ON COLUMN viagens.data_criacao IS 'Data de criação do registro (preenc
 COMMENT ON COLUMN viagens.data_alteracao IS 'Data da última alteração do registro (começa com NULL)';
 COMMENT ON COLUMN viagens.data_finalizacao IS 'Data de finalização da viagem (preenchida automaticamente quando viagem_concluida for true pela primeira vez)';
 COMMENT ON COLUMN viagens.descricao IS 'Descrição opcional da viagem';
-
-
+COMMENT ON COLUMN viagens.rota IS 'ID da rota associada à viagem';
+COMMENT ON COLUMN viagens.status IS 'Status da viagem (por exemplo, 1 para ativa, 2 para concluída, etc.)';
 
 ------------------VEICULOS-------------------------
 
@@ -165,6 +166,42 @@ COMMENT ON COLUMN pessoa_fisica.data_nascimento IS 'Data de nascimento da pessoa
 COMMENT ON COLUMN pessoa_fisica.endereco IS 'Endereço da pessoa física';
 COMMENT ON COLUMN pessoa_fisica.email IS 'Endereço de email da pessoa física, com restrição UNIQUE';
 
+----------ROTAS------------------
+
+ DROP TABLE IF EXISTS public.rotas;
+
+CREATE TABLE IF NOT EXISTS public.rotas
+(
+    id SERIAL NOT NULL,
+    rota text COLLATE pg_catalog."default" NOT NULL,
+    distancia_km numeric(10,2) NOT NULL,
+	  origem text COLLATE pg_catalog."default" NOT NULL,
+	  destino text COLLATE pg_catalog."default" NOT NULL,
+    duracao_minutos numeric(8,2) NOT NULL,
+    descricao text COLLATE pg_catalog."default",
+	  observacao text COLLATE pg_catalog."default",	
+    data_criacao timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT rotas_pkey PRIMARY KEY (id)
+)
 
 
+-- Comentários para a tabela e colunas
+COMMENT ON TABLE public.rotas IS 'Tabela para armazenar informações sobre rotas';
 
+COMMENT ON COLUMN public.rotas.id IS 'Identificador único da rota';
+COMMENT ON COLUMN public.rotas.rota IS 'Nome da rota';
+COMMENT ON COLUMN public.rotas.distancia_km IS 'Distância da rota em quilômetros';
+COMMENT ON COLUMN public.rotas.origem IS 'Cidade de origem da rota';
+COMMENT ON COLUMN public.rotas.destino IS 'Cidade de destino da rota';
+COMMENT ON COLUMN public.rotas.duracao_minutos IS 'Duração estimada da rota em minutos';
+COMMENT ON COLUMN public.rotas.descricao IS 'Descrição da rota (opcional)';
+COMMENT ON COLUMN public.rotas.observacao IS 'Observações sobre a rota (opcional)';
+COMMENT ON COLUMN public.rotas.data_criacao IS 'Data de criação do registro (preenchida automaticamente)';
+
+-- Comentário para a chave primária
+COMMENT ON CONSTRAINT rotas_pkey ON public.rotas IS 'Chave primária da tabela rotas';
+
+
+-- Adicione uma chave estrangeira na coluna "rota" da tabela "viagens"
+ALTER TABLE public.viagens
+ADD CONSTRAINT fk_rota FOREIGN KEY (rota) REFERENCES rotas(id);
