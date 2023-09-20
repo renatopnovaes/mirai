@@ -205,3 +205,66 @@ COMMENT ON CONSTRAINT rotas_pkey ON public.rotas IS 'Chave primária da tabela r
 -- Adicione uma chave estrangeira na coluna "rota" da tabela "viagens"
 ALTER TABLE public.viagens
 ADD CONSTRAINT fk_rota FOREIGN KEY (rota) REFERENCES rotas(id);
+
+
+-----PAPEIS---------
+
+ DROP TABLE IF EXISTS papeis;
+
+CREATE TABLE papeis (
+    id serial PRIMARY KEY,
+    pfid INT REFERENCES pessoa_fisica(id),
+    dt_criacao TIMESTAMP DEFAULT current_timestamp,
+    dt_inativacao TIMESTAMP,
+    us_alteracao INT,
+    status BOOLEAN DEFAULT true,
+    observacao TEXT
+);
+
+COMMENT ON TABLE papeis IS 'Tabela para armazenar informações de papéis associados a pessoas físicas.';
+COMMENT ON COLUMN papeis.id IS 'Identificador único do papel.';
+COMMENT ON COLUMN papeis.pfid IS 'Chave estrangeira que faz referência à pessoa física associada ao papel.';
+COMMENT ON COLUMN papeis.dt_criacao IS 'Data e hora de criação do registro.';
+COMMENT ON COLUMN papeis.dt_inativacao IS 'Data e hora de inativação do papel, se aplicável.';
+COMMENT ON COLUMN papeis.us_alteracao IS 'Chave estrangeira que faz referência ao usuário responsável pela última alteração do papel.';
+COMMENT ON COLUMN papeis.status IS 'Status do papel (ativo ou inativo).';
+COMMENT ON COLUMN papeis.observacao IS 'Observação ou notas relacionadas ao papel.';
+
+
+
+
+ DROP TABLE IF EXISTS viagem_composicao;
+CREATE TABLE viagem_composicao (
+    id serial PRIMARY KEY,
+    viagem_id INT REFERENCES viagens(id),
+    veiculo_id INT REFERENCES veiculos(id),
+    veiculo_composicao_id INT, -- Coluna para acomodar a futura chave estrangeira para "veiculo_composicao"
+    pessoa_fisica_id INT REFERENCES papeis(id), -- Chave estrangeira para o campo "id" da tabela "papeis"    
+    
+    -- Data e hora de criação do registro
+    data_criacao TIMESTAMP DEFAULT current_timestamp,
+    
+    -- Restrições para garantir que as combinações de valores sejam únicas em cada linha
+    CONSTRAINT uk_viagem_composicao_unique_values UNIQUE (viagem_id, veiculo_id, veiculo_composicao_id, pessoa_fisica_id),
+    
+    -- Restrições de chave estrangeira para viagem_id e veiculo_id
+    CONSTRAINT fk_viagem FOREIGN KEY (viagem_id) REFERENCES viagens(id),
+    CONSTRAINT fk_veiculo FOREIGN KEY (veiculo_id) REFERENCES veiculos(id)
+);
+
+
+
+-- Comentário sobre a tabela
+COMMENT ON TABLE viagem_composicao IS 'Tabela para registrar a composição de uma viagem.';
+
+-- Comentários das colunas
+COMMENT ON COLUMN viagem_composicao.id IS 'Identificador único da composição da viagem.';
+COMMENT ON COLUMN viagem_composicao.viagem_id IS 'Chave estrangeira que faz referência à viagem à qual esta composição pertence.';
+COMMENT ON COLUMN viagem_composicao.veiculo_id IS 'Chave estrangeira que faz referência ao veículo principal utilizado na viagem (caminhão ou carreta).';
+COMMENT ON COLUMN viagem_composicao.veiculo_composicao_id IS 'Chave estrangeira que fará referência à composição do veículo, especialmente no caso de carretas (será adicionada posteriormente).';
+COMMENT ON COLUMN viagem_composicao.pessoa_fisica_id IS 'Chave estrangeira que faz referência à pessoa física associada ao papel na tabela "papeis".';
+COMMENT ON COLUMN viagem_composicao.data_criacao IS 'Data e hora de criação do registro na tabela.';
+
+-- Comentário das chaves estrangeiras
+COMMENT ON CONSTRAINT fk_viagem ON viagem_composicao IS 'Chave estrangeira que faz referência à tabela de viagens.';
+COMMENT ON CONSTRAINT fk_veiculo ON viagem_composicao IS 'Chave estrangeira que faz referência à tabela de veículos.';

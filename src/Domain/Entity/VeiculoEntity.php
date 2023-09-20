@@ -2,7 +2,7 @@
 
 namespace Domain\Entity;
 
-class VeiculosEntity
+class VeiculoEntity
 {
     public function __construct(
         private readonly int|null $id,
@@ -10,8 +10,11 @@ class VeiculosEntity
         private readonly string $modelo,
         private readonly int $ano,
         private readonly string $cor,
-        private readonly float $preco,
-        private readonly ?string $placa
+        private readonly ?string $placa,
+        private readonly int $capacidade,
+        private readonly ?string $tipo,
+        private readonly ?int $status,
+        private readonly ?string $observacao
     ) {
     }
 
@@ -40,13 +43,29 @@ class VeiculosEntity
         return $this->cor;
     }
 
-    public function getPreco(): float
-    {
-        return $this->preco;
-    }
 
     public function getPlaca(): ?string
     {
         return $this->placa;
+    }
+
+    public function getCapacidade(): int
+    {
+        return $this->capacidade;
+    }
+
+    public function getTipo(): ?string
+    {
+        return $this->tipo;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function getObservacao(): ?string
+    {
+        return $this->observacao;
     }
 }

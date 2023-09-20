@@ -6,7 +6,7 @@ const populateViagensTable = async () => {
 
     viagensData.forEach(viagem => {
         const newRow = document.createElement('tr');
-        newRow.classList.add('border-b', 'border-gray-200', 'hover:bg-gray-100', 'hover:shadow-md', 'transition', 'duration-200');
+        newRow.classList.add('border-b', 'border-gray-200', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-100', 'hover:shadow-md', 'transition', 'duration-200');
 
         // Definindo o ouvinte de evento de clique para marcar o rádio
         newRow.addEventListener('click', () => {
@@ -17,10 +17,10 @@ const populateViagensTable = async () => {
         //newRow.setAttribute('id', `viagem-${viagem.id}`);
         //  newRow.setAttribute('onclick', `window.location.href = '/mirai/public/viagem/${viagem.id}'`);
         newRow.setAttribute('style', 'cursor: pointer');
-        // Resto do código...
+
 
         newRow.innerHTML = `
-            <td class="w-4 p-4">
+            <td class="w-2 p-2" >
                 <div class="flex justify-center">
                     <input id="filter-radio-viagem-${viagem.id}" type="radio" value="" name="filter-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="filter-radio-viagem-${viagem.id}" class="sr-only">radio</label>
@@ -36,6 +36,7 @@ const populateViagensTable = async () => {
                     </div>
                     
                     <div class="font-normal text-gray-500">${viagem.rota}</div>
+                    <div class="font-normal mb-1"><b>Chegada:</b> ${viagem.data_chegada}</div>
                 </div>
             </td>
 

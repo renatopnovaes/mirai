@@ -1,6 +1,7 @@
 import { getListRotas } from "../../../web/assets/js/fetch/rota.js"
+import { getListVeiculos } from "../../../web/assets/js/fetch/veiculo.js"
 
-document.getElementById('addCarga').addEventListener('click', async () => {
+document.getElementById('addCarga',).addEventListener('click', async () => {
     populateRotasSelect();
 });
 
@@ -27,7 +28,35 @@ const populateRotasSelect = async () => {
 }
 
 
+document.getElementById('addVeiculos',).addEventListener('click', async () => {
 
+    console.log('teste')
+    populateVeiculosSelect();
+});
+
+
+const populateVeiculosSelect = async () => {
+    const veiculosData = await getListVeiculos();
+    const veiculosSelect = document.getElementById('veiculo_select');
+
+    veiculosSelect.innerHTML = '';
+
+    const defaultOption = document.createElement('option');
+    defaultOption.selected = true;
+    defaultOption.textContent = 'Escolha o Veículo';
+    veiculosSelect.appendChild(defaultOption);
+
+    console.log(veiculosData);
+
+    veiculosData.forEach(veiculo => {
+        const newOption = document.createElement('option');
+        newOption.setAttribute('value', veiculo.id);
+        newOption.innerHTML = veiculo.placa;
+
+        veiculosSelect.appendChild(newOption);
+
+    })
+}
 // }
 
 // window.addEventListener('load', () => {

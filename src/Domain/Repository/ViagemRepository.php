@@ -44,7 +44,10 @@ class ViagemRepository
         SELECT
             *
         FROM         
-            public.vw_viagens";
+            public.vw_viagens
+        WHERE 
+            status is null
+        ORDER BY data_saida DESC";
 
         try {
             $stt = $conn->prepare($sql);
