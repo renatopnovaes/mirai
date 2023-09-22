@@ -64,7 +64,7 @@ require_once __DIR__ . "/../../config/autoload.php";
     </nav>
     <!-------------------------- MODAL ADD TRAVELS ---------------------->
     <div class="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
-        <div class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+        <div class="border border-teal-500 h-5/6 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
             <div class="modal-content py-4 text-left px-6">
                 <!--Title-->
                 <div class="flex justify-between items-center pb-3">
@@ -80,26 +80,78 @@ require_once __DIR__ . "/../../config/autoload.php";
                 <div class="my-5">
 
                     <form id="formViagem">
-                        <div class="mb-6">
+                        <div class="mb-3">
                             <label for="data_saida" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data de Saída</label>
                             <input type="date" id="data_saida" name="data_saida" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
                         </div>
-                        <div class="mb-6">
-                            <label for="rota" class="sr-only">Escolha o Veículo</label>
+
+                        <div class="mb-3">
+                            <label for="km_inicio" class="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white">KM Início</label>
+                            <input type="number" name="viagem_km_saida" id="km_inicio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Insira o KM inicial do veículo na viagem" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="rota" class="sr-only">Escolha a Rota</label>
                             <select id="rota" name="rota" class="block py-2.5 px-0 w-full text-sm font-medium text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
                                 <option selected>Escolha a Rota</option>
                                 <option value="${id}">${rota}</option>
                             </select>
                         </div>
+
+                        <div class="mb-3">
+                            <label for="motorista_select" class="sr-only">Escolha o Motorista</label>
+                            <select id="motorista_select" name="viagem_motorista" class="block py-2.5 px-0 w-full text-sm font-medium text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                <option selected>Escolha o Motorista</option>
+                                <option value="${id}">${veiculo}</option>
+                            </select>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="veiculo_select" class="sr-only">Escolha o Veículo</label>
+                            <select id="veiculo_select" name="viagem_veiculo" class="block py-2.5 px-0 w-full text-sm font-medium text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                <option selected>Escolha o Veículo</option>
+                                <option value="${id}">${veiculo}</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="reboque_select" class="sr-only">Escolha o Reboque</label>
+                            <select id="reboque_select" name="viagem_reboque" class="block py-2.5 px-0 w-full text-sm font-medium text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                <option selected>Escolha o Reboque</option>
+                                <option value="${id}">${carreta}</option>
+                            </select>
+                        </div>
+
+
+
+
+
+                        <!--- Data de Chegada -->
+                        <div class="mb-3">
+                            <label for="data_chegada" class="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white">Data de Chegada</label>
+                            <input type="date" name="viagem_data_chegada" id="data_chegada" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Insira o KM final do veículo na viagem" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="km_fim" class="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white">KM Fim</label>
+                            <input type="number" name="viagem_km_chegada" id="km_fim" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Insira o KM final do veículo na viagem" required>
+                        </div>
+
                         <div class="mb-6">
                             <label for="observacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observação</label>
                             <input type="text" id="observacao" name="observacao" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
+
+
                         <button id="btnCadastrarViagem" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                         <button class="modal-close text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">CANCELAR</button>
 
+
+
+
+                    </form>
                 </div>
-                </form>
             </div>
 
         </div>
@@ -125,171 +177,42 @@ require_once __DIR__ . "/../../config/autoload.php";
 
                     <form id="formAbastecimento">
                         <div class="mb-6">
-                            <label for="data_saida" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data de Saída</label>
-                            <input type="date" id="data_saida" name="data_saida" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o KM" required>
+                            <label for="data_abastecimento" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data do Abastecimento</label>
+                            <input type="date" id="data_abastecimento" name="data_abastecimento" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o KM" required>
                             <!-- INPUT LITROS-->
-                            <label for="litros" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Litros</label>
-                            <input type="number" id="litros" name="litros" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o KM" required>
-                            <!-- INPUT KM-->
-                            <label for="km" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">KM</label>
-                            <input type="number" id="km" name="km" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o KM" required>
-                            <!-- INPUT VALOR-->
-                            <label for="valor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor</label>
-                            <input type="number" id="valor" name="valor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o KM" required>
+                            <label for="litros" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total de Litros</label>
+                            <input type="number" id="litros" name="litros" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o Total de Litros" required>
+                            <!-- INPUT Litro VALOR-->
+                            <label for="litro_valor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor do Litro</label>
+                            <input type="number" id="litro_valor" name="litro_valor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o Valor do Litro" required>
+                            <!-- INPUT VALOR TOTAL-->
+                            <label for="valor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor Total</label>
+                            <input type="number" id="valor" name="valor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o Valor Total" required>
+
                             <!-- INPUT POSTO-->
                             <label for="posto" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Posto</label>
-                            <input type="text" id="posto" name="posto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o KM" required>
-                            <!-- INPUT CNPJ-->
-                            <label for="cnpj" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CNPJ</label>
-                            <input type="text" id="cnpj" name="cnpj" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o KM" required>
-                            <!-- INPUT NF-->
-                            <label for="nf" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NF</label>
-                            <input type="text" id="nf" name="nf" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o KM" required>
-                            <!-- INPUT MOTORISTA-->
-                            <label for="motorista" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Motorista</label>
-                            <input type="text" id="motorista" name="motorista" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o KM" required>
+                            <input type="text" id="posto" name="posto" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o Posto" required>
 
-                            <!-- ROUTE -->
-                            <label for="rota" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rota</label>
-                            <input type="text" id="rota" name="rota" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <!-- INPUT KM-->
                             <label for="km" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">KM</label>
-                            <input type="number" id="km" name="km" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <!-- INPUT VALOR-->
-                            <label for="valor" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Valor</label>
-                            <input type="number" id="valor" name="valor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <input type="number" id="km" name="km" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Insira o KM do abastecimento" required>
 
-
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-------------------------- MODAL CONFIGURAÇÕES ---------------------->
-    <div class="veiculos-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
-        <div class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-2xl mx-auto rounded shadow-lg z-50 overflow-y-auto">
-            <!--- COLUNA 1 -->
-            <div class="modal-content py-4 text-left px-6">
-                <!--Title-->
-                <div class="flex justify-between items-center pb-3">
-                    <p class="text-xl font-bold">Composição da Viagem</p>
-                    <div class="modal-close cursor-pointer z-50">
-                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-                            </path>
-                        </svg>
-                    </div>
-                </div>
-
-
-                <!--Body-->
-
-                <div class="mb-2 w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-                    <div class="flex items-center justify-between mb-4">
-                        <h5 class="text-sm font-bold leading-none text-gray-900 dark:text-white">Veículos Disponíves</h5>
-                        <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-                            Nova Configuração
-                        </a>
-                    </div>
-                    <div class="flow-root">
-                        <div class="Veículo">
-                            <label for="veiculo_select" class="sr-only">Escolha o Veículo</label>
-                            <select id="veiculo_select" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                <option selected>Escolha o Veículo</option>
-                                <option value="${id}">${veiculo}</option>
-                            </select>
-                        </div>
-
-                        <div class="combinacaoCarreta">
-                            <label for="underline_select" class="sr-only">Escolha a Composição</label>
-                            <select id="underline_select" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                <option selected>Escolha a Composição</option>
-                                <option value="${id}">${carreta}</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="km_inicio" class="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white">KM Início</label>
-                        <input type="number" name="km_inicio" id="km_inicio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Insira o KM inicial do veículo na viagem" required>
-                    </div>
-
-                </div>
-
-
-                <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-                    <div class="flex items-center justify-between mb-4">
-                        <h5 class="text-sm font-bold leading-none text-gray-900 dark:text-white">Motoristas Disponíves</h5>
-                        <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-                            Nova Configuração
-                        </a>
-                    </div>
-                    <div class="flow-root">
-                        <div class="Veículo">
-                            <label for="motorista_viagem" class="sr-only">Escolha o Veículo</label>
-                            <select id="motorista_viagem" class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                                <option selected>Escolha o Motorista</option>
-                                <option value="${id}">${veiculo}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-
-
-
-        </div>
-    </div>
-
-
-    <!-------- MODAL FINALIZAR VIAGEM -------->
-    <div class="finalizar-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster" style="background: rgba(0,0,0,.7);">
-        <div class="border border-teal-500 shadow-lg modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-            <div class="modal-content py-4 text-left px-6">
-
-                <!--Title-->
-                <div class="flex justify-between items-center pb-3">
-                    <p class="text-2xl font-bold">Finalizar Viagem</p>
-                    <div class="modal-close cursor-pointer z-50">
-                        <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-                            </path>
-                        </svg>
-                    </div>
-                </div>
-                <!--Body-->
-                <div class="my-5">
-
-                    <form id="formFinalViagem">
-                        <div class="mb-6">
-                            <label for="data_chegada" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Data de Chegada</label>
-                            <input type="date" id="data_chegada" name="data_chegada" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required>
-                        </div>
-
-                        <div class="mb-6">
-                            <label for="km_fim" class="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white">KM Final</label>
-                            <input type="number" name="km_fim" id="km_fim" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Insira o KM inicial do veículo na viagem" required>
-                        </div>
-
-                        <div class="mb-6">
+                            <!-- INPUT OBSERVAÇÃO-->
                             <label for="observacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Observação</label>
                             <input type="text" id="observacao" name="observacao" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                            <button id="btnCadastrarAbastecimento" class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                            <button class="mt-4 modal-close text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">CANCELAR</button>
+
                         </div>
-
-                        <button id="btnFinalizarViagem" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-                        <button class="modal-close text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">CANCELAR</button>
-
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
+
+
+
 
 
 

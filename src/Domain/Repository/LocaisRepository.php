@@ -15,7 +15,7 @@ class LocaisRepository
             local_id,
             local_nome
         FROM public.locais
-     ";
+         ";
 
      try {
         

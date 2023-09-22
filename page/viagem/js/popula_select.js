@@ -1,8 +1,13 @@
 import { getListRotas } from "../../../web/assets/js/fetch/rota.js"
 import { getListVeiculos } from "../../../web/assets/js/fetch/veiculo.js"
+import { getListReboque } from "../../../web/assets/js/fetch/reboque.js"
+import { getListMotoristas } from "../../../web/assets/js/fetch/motorista.js"
 
 document.getElementById('addCarga',).addEventListener('click', async () => {
     populateRotasSelect();
+    populateVeiculosSelect();
+    populateReboquesSelect();
+    populateMotoristasSelect();
 });
 
 
@@ -30,8 +35,10 @@ const populateRotasSelect = async () => {
 
 document.getElementById('addVeiculos',).addEventListener('click', async () => {
 
-    console.log('teste')
+
     populateVeiculosSelect();
+    populateReboquesSelect();
+    populateMotoristasSelect();
 });
 
 
@@ -46,7 +53,7 @@ const populateVeiculosSelect = async () => {
     defaultOption.textContent = 'Escolha o Veículo';
     veiculosSelect.appendChild(defaultOption);
 
-    console.log(veiculosData);
+
 
     veiculosData.forEach(veiculo => {
         const newOption = document.createElement('option');
@@ -57,29 +64,45 @@ const populateVeiculosSelect = async () => {
 
     })
 }
-// }
 
-// window.addEventListener('load', () => {
-//     createOptionForSelectProduto()
-// })
+const populateReboquesSelect = async () => {
+    const reboquesData = await getListReboque();
+    const reboquesSelect = document.getElementById('reboque_select');
 
-// async function createOptionForSelectProduto() {
-//     const select_produto = document.querySelector('select[name="produto"]')
-//     const list_produto = await getListProdutos()
+    reboquesSelect.innerHTML = '';
 
-//     // Remove todos as options exceto a primeira
-//     Array.from(select_produto.querySelectorAll('option:not(:first-child)')).forEach(op => op[0].remove())
+    const defaultOption = document.createElement('option');
+    defaultOption.selected = true;
+    defaultOption.textContent = 'Escolha o Reboque';
+    reboquesSelect.appendChild(defaultOption);
 
-//     // Adiciona as options
-//     if (Array.isArray(list_produto) && list_produto.length) {
-//         list_produto.forEach(produto => {
-//             const { produto_id, produto_nome, produto_quantidade } = produto
+    reboquesData.forEach(reboque => {
+        const newOption = document.createElement('option');
+        newOption.setAttribute('value', reboque.id);
+        newOption.innerHTML = reboque.placa;
 
+        reboquesSelect.appendChild(newOption);
 
-//             if (produto_id && produto_nome) {
-//                 select_produto.append(new Option(produto_nome.concat("(", produto_quantidade, ")"), produto_id))
-//             }
-//         })
-//     }
+    })
+}
 
-// }
+const populateMotoristasSelect = async () => {
+    const motoristasData = await getListMotoristas();
+    const motoristasSelect = document.getElementById('motorista_select');
+
+    motoristasSelect.innerHTML = '';
+
+    const defaultOption = document.createElement('option');
+    defaultOption.selected = true;
+    defaultOption.textContent = 'Escolha o Motorista';
+    motoristasSelect.appendChild(defaultOption);
+
+    motoristasData.forEach(motorista => {
+        const newOption = document.createElement('option');
+        newOption.setAttribute('value', motorista.id);
+        newOption.innerHTML = motorista.nome;
+
+        motoristasSelect.appendChild(newOption);
+
+    })
+}

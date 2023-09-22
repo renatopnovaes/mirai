@@ -1,5 +1,8 @@
 import { getListViagemAberta } from "../../../web/assets/js/fetch/viagem.js"
 
+// Variável global para armazenar o valor de viagem.id
+let selectedViagemId = null;
+
 const populateViagensTable = async () => {
     const viagensData = await getListViagemAberta();
     const viagensBody = document.getElementById('viagens-body');
@@ -8,16 +11,25 @@ const populateViagensTable = async () => {
         const newRow = document.createElement('tr');
         newRow.classList.add('border-b', 'border-gray-200', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-100', 'hover:shadow-md', 'transition', 'duration-200');
 
-        // Definindo o ouvinte de evento de clique para marcar o rádio
+        // Definindo o ouvinte de evento de clique para marcar o rádio e destacar a linha
         newRow.addEventListener('click', () => {
-            const radioInput = document.getElementById(`filter-radio-example-${viagem.id}`);
+            const radioInput = document.getElementById(`filter-radio-viagem-${viagem.id}`);
+
+            // Remover classe de destaque da linha anterior (se existir)
+            if (highlightedRow) {
+                highlightedRow.classList.remove('bg-highlight'); // Classe de destaque
+            }
+
+            // Marcar o rádio
             radioInput.checked = true;
+
+            // Destacar a linha atual
+            newRow.classList.add('bg-highlight'); // Classe de destaque
+            highlightedRow = newRow; // Armazenar a linha destacada
+
+            // Define o valor de selectedViagemId quando uma linha é clicada
+            selectedViagemId = viagem.id;
         });
-
-        //newRow.setAttribute('id', `viagem-${viagem.id}`);
-        //  newRow.setAttribute('onclick', `window.location.href = '/mirai/public/viagem/${viagem.id}'`);
-        newRow.setAttribute('style', 'cursor: pointer');
-
 
         newRow.innerHTML = `
             <td class="w-2 p-2" >
@@ -41,41 +53,24 @@ const populateViagensTable = async () => {
             </td>
 
             <td class="w-4 p-4">
-                <div class="text-base font-semibold">${viagem.cavalinho}</div>
-                <div class="text-base">${viagem.carreta}</div>
+                <div class="text-base font-semibold">${viagem.reboque}</div>
+                <div class="text-base">${viagem.veiculo}</div>
 
             </td>
 
             <td class="w-4 p-4">
-                <div class="text-base font-semibold">${viagem.nome_motorista}</div>
-                <div class="text-base font-semibold">${viagem.nome_motorista1}</div>
+                <div class="text-base font-semibold">${viagem.motorista}</div>
+                <div class="text-base font-semibold">${viagem.motorista1}</div>
 
             </td>
             
             <td class="w-4 p-4">                
-                <div class="text-base font-semibold">${viagem.chegada}</div>
-                <div class="text-base font-semibold">${viagem.alerta_abastecimentos}</div>
-                <div class="text-base font-semibold">${viagem.alerta_manutencao}</div>
+                <div class="text-base font-semibold">${viagem.abastecimento}</div>
+                <div class="text-base font-semibold">${viagem.abastecimento_valor}</div>
+                <div class="text-base font-semibold">${viagem.abastecimento}</div>
                 <div class="text-base font-semibold">${viagem.observacoes}</div>
             </td>
         `;
-
-        // Definindo o ouvinte de evento de clique para marcar o rádio e destacar a linha
-        newRow.addEventListener('click', () => {
-            const radioInput = document.getElementById(`filter-radio-viagem-${viagem.id}`);
-
-            // Remover classe de destaque da linha anterior (se existir)
-            if (highlightedRow) {
-                highlightedRow.classList.remove('bg-highlight'); // Classe de destaque
-            }
-
-            // Marcar o rádio
-            radioInput.checked = true;
-
-            // Destacar a linha atual
-            newRow.classList.add('bg-highlight'); // Classe de destaque
-            highlightedRow = newRow; // Armazenar a linha destacada
-        });
 
         viagensBody.appendChild(newRow);
     });
@@ -84,5 +79,43 @@ const populateViagensTable = async () => {
 // Declarar a variável aqui fora do escopo da função
 let highlightedRow = null;
 
+// Adicione um ouvinte de evento de clique para o botão addVeiculos
+document.getElementById('addAbastecimento').addEventListener('click', () => {
+    if (selectedViagemId !== null) {
+        // O valor de selectedViagemId contém o ${viagem.id} da linha selecionada
+        console.log('Valor de viagem.id:', selectedViagemId);
+
+        // Faça algo com o valor de viagem.id, por exemplo, envie-o para uma função ou faça uma ação específica.
+    } else {
+        console.log('Nenhuma linha selecionada.');
+        // Trate o caso em que nenhuma linha está selecionada.
+    }
+});
 
 populateViagensTable();
+
+import { addAbastecimento } from "../../../web/assets/js/fetch/abastecimento.js";
+
+
+document.getElementById("btnCadastrarAbastecimento").addEventListener("click", function (e) {
+
+    e.preventDefault();
+    const form = document.getElementById("formAbastecimento");
+    const formData = new FormData(form);
+
+    formData.append("viagem_id", selectedViagemId);
+
+    (async () => {
+        try {
+
+            const request = await addAbastecimento(formData);
+
+
+        } catch {
+            throw new Error(e)
+
+
+        }
+    })()
+
+})

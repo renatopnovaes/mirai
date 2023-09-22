@@ -1,4 +1,5 @@
 import { addViagem } from "../../../web/assets/js/fetch/viagem.js";
+import { addAbastecimento } from "../../../web/assets/js/fetch/abastecimento.js";
 
 document.getElementById("btnCadastrarViagem").addEventListener("click", function (e) {
 
@@ -15,9 +16,11 @@ document.getElementById("btnCadastrarViagem").addEventListener("click", function
             if (request.status) return atualizarLista(request.status)
             console.log("status nao entrou")
         } catch {
+            throw new Error(e)
 
 
         }
     })()
 
 })
+

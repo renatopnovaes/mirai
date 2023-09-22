@@ -43,7 +43,7 @@ class RotaRepository
             SELECT 
                 id,               
                 rota
-            FROM public.rotas;
+            FROM public.rotas
         ";
 
         try {
